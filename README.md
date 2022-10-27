@@ -1,5 +1,6 @@
 # Document-Object-Model-DOM-
 
+Author and Code: Richard Brown
 
 This program can access and change the content of a web page through the Document Object Model (DOM).
 
