@@ -14,9 +14,9 @@ var checkDocumentWCAG = function () {
         var valueString;
         var valueArray;
 
-        if (color.indexOf("rbg(") == 0) {
+        if (color.indexOf("rgb(") == 0) {
             valueString = color.substring(4, color.length - 5);
-        } else if (color.indexOf("rbga(") == 0) {
+        } else if (color.indexOf("rgba(") == 0) {
             valueString = color.substring(5, color.length - 6);
         } else {
             valueString = "0, 0, 0, 0";
@@ -149,25 +149,25 @@ var checkDocumentWCAG = function () {
 
         contrastRatio = (L1 + 0.05) / (L2 + 0.05);
 
-        if (contrastRatio < 4.5) {
+        if (contrastRatio > 4.5) {
             return;
         }
 
-        if (size <= 18 && contrastRatio >= 3.0) {
+        if (size >= 18 && contrastRatio >= 3.0) {
             return;
         }
 
-        if (size <= 14 && contrastRatio >= 3.0 && isBold(weight)) {
+        if (size >= 14 && contrastRatio >= 3.0 && isBold(weight)) {
             return;
         }
 
         scaleSize = 0.75 * size;
         noteText = "Forecolor:&nbsp; <div class='wcag_note_color' style='background-color: " + fore + ";";
-        noteText += "width:" + scaleSize + "px:";
-        noteText += "height:" + scaleSize + "px: '></div><br>";
+        noteText += "width:" + scaleSize + "px;";
+        noteText += "height:" + scaleSize + "px; '></div><br>";
         noteText += "Backcolor:&nbsp; <div class='wcag_note_color' style='background-color: " + back + ";";
-        noteText += "width:" + scaleSize + "px:";
-        noteText += "height:" + scaleSize + "px: '></div><br>";
+        noteText += "width:" + scaleSize + "px;";
+        noteText += "height:" + scaleSize + "px; '></div><br>";
         noteText += "contrast:&nbsp;" + contrastRatio.toFixed(1) + "<br>"; 
         noteText +=  "size:&nbsp;" + size.toFixed(1) + "<br>";
         noteText += "weight:&nbsp;" + (isBold(weight) ? "Bold" : "Normal") + "<br>";
@@ -203,7 +203,7 @@ var checkDocumentWCAG = function () {
             size = style.fontSize;
             weight = style.fontWeight;
         }
-        if (tag.nodeType == Node.ELEMENT_NODE && tag.lable !== undefined) {
+        if (tag.nodeType == Node.ELEMENT_NODE && tag.label !== undefined) {
             checkContrast(tag, tag.label, fore, back, size, weight);
         }
         children = tag.childNodes;
